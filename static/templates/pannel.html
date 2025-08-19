@@ -1,14 +1,13 @@
 {{template "header"}}
 <style>
     .deployment-guide {
-        margin: 20px auto;
         padding: 24px;
         background: #fff;
         border-radius: 8px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     }
     .deployment-section {
-        margin: 30px 0;
+    
         padding: 20px;
         background: #f8fafc;
         border-radius: 8px;
@@ -39,8 +38,6 @@
     }
     #app {
         background: #f5f7fa;
-        padding: 20px;
-        min-height: calc(100vh - 40px);
     }
     .el-card {
         border-radius: 8px;
@@ -51,25 +48,27 @@
 </style>
 <div id="app" style="width:100%;background: #f5f7fa">
     <template>
-        <el-card class="deployment-guide">
-            <div slot="header" class="clearfix">
-                <h2>Quick Start via Chat Link</h2>
-            </div>
+        <div style="padding: 20px">
+            <el-card class="deployment-guide">
+                <div slot="header" class="clearfix">
+                    <h2>Quick Start via Chat Link</h2>
+                </div>
 
-            <div class="deployment-section">
-                <p>To immediately access your customer support chat interface:</p>
-                <p>Your live chat endpoint is available at:</p>
-                <el-input v-model="chatEndpoint" readonly style="width: 100%; margin-top: 10px;">
-                    <el-button slot="append" icon="el-icon-link"
-                               v-on:click="openChatWindow(chatEndpoint)"
-                               title="Open chat in new window"></el-button>
-                    <el-button slot="append" icon="el-icon-document-copy"
-                               v-on:click="copyText(chatEndpoint)"
-                               title="Copy link"></el-button>
-                </el-input>
-            </div>
+                <div class="deployment-section">
+                    <p>To immediately access your customer support chat interface</p>
+                    <p>Your live chat endpoint is available at:</p>
+                    <el-input v-model="chatEndpoint" readonly style="width: 100%; margin-top: 10px;">
+                        <el-button slot="append" icon="el-icon-link"
+                                   v-on:click="openChatWindow(chatEndpoint)"
+                                   title="Open chat in new window"></el-button>
+                        <el-button slot="append" icon="el-icon-document-copy"
+                                   v-on:click="copyText(chatEndpoint)"
+                                   title="Copy link"></el-button>
+                    </el-input>
+                </div>
 
-        </el-card>
+            </el-card>
+        </div>
 
     </template>
 
