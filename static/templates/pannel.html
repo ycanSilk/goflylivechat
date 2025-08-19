@@ -53,23 +53,19 @@
     <template>
         <el-card class="deployment-guide">
             <div slot="header" class="clearfix">
-                <h2>System Deployment Guide</h2>
+                <h2>Quick Start via Chat Link</h2>
             </div>
 
-            <el-steps :active="3" align-center>
-                <el-step title="Server Setup" description="Prepare your hosting environment"></el-step>
-                <el-step title="System Installation" description="Deploy the application"></el-step>
-                <el-step title="Configuration" description="Set up system parameters"></el-step>
-                <el-step title="Go Live" description="Launch your chat system"></el-step>
-            </el-steps>
-
             <div class="deployment-section">
-                <h3>Quick Start via Chat Link</h3>
                 <p>To immediately access your customer support chat interface:</p>
                 <p>Your live chat endpoint is available at:</p>
                 <el-input v-model="chatEndpoint" readonly style="width: 100%; margin-top: 10px;">
+                    <el-button slot="append" icon="el-icon-link"
+                               v-on:click="openChatWindow(chatEndpoint)"
+                               title="Open chat in new window"></el-button>
                     <el-button slot="append" icon="el-icon-document-copy"
-                               v-on:click="copyText(chatEndpoint)"></el-button>
+                               v-on:click="copyText(chatEndpoint)"
+                               title="Copy link"></el-button>
                 </el-input>
             </div>
 
