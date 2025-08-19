@@ -88,18 +88,25 @@ http://127.0.0.1:8081/livechat?user_id=agent
 Popup Integration
 
 ```
-    (function(a, b, c, d) {
-        let h = b.getElementsByTagName('head')[0];let s = b.createElement('script');
-        s.type = 'text/javascript';s.src = c+"/static/js/kefu-front.js";s.onload = s.onreadystatechange = function () {
-            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") d(c);
-        };h.appendChild(s);
-    })(window, document,"http://127.0.0.1:8081",function(u){
-        KEFU.init({
-            KEFU_URL:u,
-            KEFU_KEFU_ID: "agent",
-        })
+<script>
+    (function(global, document, scriptUrl, callback) {
+        const head = document.getElementsByTagName('head')[0];
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = scriptUrl + "/static/js/chat-widget.js";
+        script.onload = script.onreadystatechange = function () {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+                callback(scriptUrl);
+            }
+        };
+        head.appendChild(script);
+    })(window, document, "http://127.0.0.1:8081", function(baseUrl) {
+        CHAT_WIDGET.initialize({
+            API_URL: baseUrl,
+            AGENT_ID: "agent",
+        });
     });
-
+</script>
 ```
 ### Important Notice  
 The use of this project for illegal or non-compliant purposes, including but not limited to viruses, trojans, pornography, gambling, fraud, prohibited items, counterfeit products, false information, cryptocurrencies, and financial violations, is strictly prohibited.  

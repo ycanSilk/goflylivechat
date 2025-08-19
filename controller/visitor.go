@@ -109,7 +109,7 @@ func PostVisitorLogin(c *gin.Context) {
 	if kefuInfo.ID == 0 {
 		c.JSON(200, gin.H{
 			"code": 400,
-			"msg":  "客服不存在",
+			"msg":  "The customer service account does not exist",
 		})
 		return
 	}
