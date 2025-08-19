@@ -7,7 +7,7 @@ import (
 )
 
 func InitViewRouter(engine *gin.Engine) {
-	engine.GET("/", tmpl.PageIndex)
+	//engine.GET("/", tmpl.PageIndex)
 
 	engine.GET("/login", tmpl.PageLogin)
 	engine.GET("/pannel", tmpl.PagePannel)
