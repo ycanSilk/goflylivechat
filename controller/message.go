@@ -115,6 +115,7 @@ func SendMessageV2(c *gin.Context) {
 			go SendNoticeEmail(content+"|"+vistorInfo.Name, content)
 		}
 		go ws.VisitorAutoReply(vistorInfo, kefuInfo, content)
+		go models.UpdateVisitorLastMessage(vistorInfo.VisitorId, content)
 		c.JSON(200, gin.H{
 			"code": 200,
 			"msg":  "ok",
@@ -165,6 +166,7 @@ func SendKefuMessage(c *gin.Context) {
 		ws.VisitorMessage(vistorInfo.VisitorId, content, kefuInfo)
 	}
 	ws.KefuMessage(vistorInfo.VisitorId, content, kefuInfo)
+	go models.UpdateVisitorLastMessage(vistorInfo.VisitorId, content)
 	c.JSON(200, gin.H{
 		"code": 200,
 		"msg":  "ok",

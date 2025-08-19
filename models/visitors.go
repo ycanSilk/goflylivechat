@@ -6,16 +6,17 @@ import (
 
 type Visitor struct {
 	Model
-	Name      string `json:"name"`
-	Avator    string `json:"avator"`
-	SourceIp  string `json:"source_ip"`
-	ToId      string `json:"to_id"`
-	VisitorId string `json:"visitor_id"`
-	Status    uint   `json:"status"`
-	Refer     string `json:"refer"`
-	City      string `json:"city"`
-	ClientIp  string `json:"client_ip"`
-	Extra     string `json:"extra"`
+	Name        string `json:"name"`
+	Avator      string `json:"avator"`
+	SourceIp    string `json:"source_ip"`
+	ToId        string `json:"to_id"`
+	VisitorId   string `json:"visitor_id"`
+	Status      uint   `json:"status"`
+	Refer       string `json:"refer"`
+	City        string `json:"city"`
+	ClientIp    string `json:"client_ip"`
+	LastMessage string `json:"last_message"`
+	Extra       string `json:"extra"`
 }
 
 func CreateVisitor(name, avator, sourceIp, toId, visitorId, refer, city, clientIp, extra string) {
@@ -64,6 +65,10 @@ func FindVisitorsOnline() []Visitor {
 	DB.Where("status = ?", 1).Find(&visitors)
 	return visitors
 }
+func UpdateVisitorLastMessage(visitorId, lastMessage string) {
+	visitor := Visitor{}
+	DB.Model(&visitor).Where("visitor_id = ?", visitorId).Update("last_message", lastMessage)
+}
 func UpdateVisitorStatus(visitorId string, status uint) {
 	visitor := Visitor{}
 	DB.Model(&visitor).Where("visitor_id = ?", visitorId).Update("status", status)
@@ -86,21 +91,21 @@ func UpdateVisitorKefu(visitorId string, kefuId string) {
 	DB.Model(&visitor).Where("visitor_id = ?", visitorId).Update("to_id", kefuId)
 }
 
-//查询条数
+// 查询条数
 func CountVisitors() uint {
 	var count uint
 	DB.Model(&Visitor{}).Count(&count)
 	return count
 }
 
-//查询条数
+// 查询条数
 func CountVisitorsByKefuId(kefuId string) uint {
 	var count uint
 	DB.Model(&Visitor{}).Where("to_id=?", kefuId).Count(&count)
 	return count
 }
 
-//查询每天条数
+// 查询每天条数
 type EveryDayNum struct {
 	Day string `json:"day"`
 	Num int64  `json:"num"`

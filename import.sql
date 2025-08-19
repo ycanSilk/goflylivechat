@@ -28,6 +28,7 @@ CREATE TABLE `visitor` (
  `visitor_id` varchar(100) NOT NULL DEFAULT '',
  `status` tinyint(4) NOT NULL DEFAULT '0',
  `refer` varchar(500) NOT NULL DEFAULT '',
+ `last_message` varchar(500) NOT NULL DEFAULT '',
  `city` varchar(100) NOT NULL DEFAULT '',
  `client_ip` varchar(100) NOT NULL DEFAULT '',
  `extra` varchar(2048) NOT NULL DEFAULT '',
