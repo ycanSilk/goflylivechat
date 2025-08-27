@@ -105,6 +105,13 @@ CHAT_WIDGET.injectStyles = function() {
             cursor: pointer;
             font-size: 20px;
         }
+        @media (max-width: 800px) {
+          #chat-widget-container {
+            width: 100% !important;
+            right: 0 !important;
+            bottom: 80px !important;
+          }
+        }
     `;
     document.head.appendChild(style);
 };
