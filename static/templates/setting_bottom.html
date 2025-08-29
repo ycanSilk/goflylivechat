@@ -10,6 +10,7 @@
         delimiters:["<{","}>"],
         data: {
             host:getBaseUrl(),
+            deployCode:"",
             kefuInfo:{},
             account: {
                 username: "",
@@ -194,6 +195,29 @@
                             _this.chatEndpoint=window.location.origin + '/livechat?user_id='+_this.kefuInfo.username;
                         }
 
+                        _this.deployCode = `
+<script>
+  (function(global, document, scriptUrl, callback) {
+    const head = document.getElementsByTagName('head')[0];
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = scriptUrl + "/static/js/chat-widget.js";
+    script.onload = script.onreadystatechange = function () {
+      if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+        callback(scriptUrl);
+      }
+    };
+    head.appendChild(script);
+  })(window, document, "${_this.host}", function(baseUrl) {
+    CHAT_WIDGET.initialize({
+      API_URL: baseUrl,
+      AGENT_ID: "${_this.kefuInfo.username}",
+    });
+  });
+<\/script>
+`.trim();
+
+
                     }
                 });
             },
@@ -211,6 +235,7 @@
 
             this.getKefuInfo();
             this.initInfo();
+
         },
         created: function () {
 

@@ -51,7 +51,7 @@
         <div style="padding: 20px">
             <el-card class="deployment-guide">
                 <div slot="header" class="clearfix">
-                    <h2>Quick Start via Chat Link</h2>
+                    <h2>Quick Start</h2>
                 </div>
 
                 <div class="deployment-section">
@@ -66,7 +66,11 @@
                                    title="Copy link"></el-button>
                     </el-input>
                 </div>
-
+                <div class="deployment-section">
+                    <p>Add the following code (via copy/paste) at the bottom of the web page (immediately before the &lt;/body> tag).</p>
+                    <el-input style="width: 100%; margin-top: 10px;" type="textarea" v-model="deployCode"  :rows="20" readonly>
+                    </el-input>
+                </div>
             </el-card>
         </div>
 
