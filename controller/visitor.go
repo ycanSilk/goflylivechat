@@ -162,7 +162,7 @@ func GetVisitors(c *gin.Context) {
 	page, _ := strconv.Atoi(c.Query("page"))
 	pagesize, _ := strconv.Atoi(c.Query("pagesize"))
 	if pagesize == 0 {
-		pagesize = int(common.VisitorPageSize)
+		pagesize = 10
 	}
 	kefuId, _ := c.Get("kefu_name")
 	vistors := models.FindVisitorsByKefuId(uint(page), uint(pagesize), kefuId.(string))
