@@ -15,43 +15,43 @@ func InitViewRouter(engine *gin.Engine) {
 	engine.GET("/setting", PageSetting)
 }
 
-// 登陆界面
+// Login page
 func PageLogin(c *gin.Context) {
 	c.HTML(http.StatusOK, "login.html", nil)
 }
 
-// 面板界面
+// Dashboard
 func PagePannel(c *gin.Context) {
 	c.HTML(http.StatusOK, "pannel.html", nil)
 }
 
-// 后台界面
+// Admin console
 func PageMain(c *gin.Context) {
 	c.HTML(http.StatusOK, "main.html", nil)
 }
 
-// 咨询界面
+// Customer chat interface
 func PageChat(c *gin.Context) {
-	kefuId := c.Query("user_id")
-	refer := c.Query("refer")
-	if refer == "" {
-		refer = c.Request.Referer()
+	referralSource := c.Query("refer") // More clear variable name
+
+	if referralSource == "" {
+		referralSource = c.Request.Referer()
 	}
-	if refer == "" {
-		refer = "​​Direct Link"
+	if referralSource == "" {
+		referralSource = "Direct access" // More natural English
 	}
+
 	c.HTML(http.StatusOK, "chat_page.html", gin.H{
-		"KEFU_ID": kefuId,
-		"Refer":   refer,
+		"Refer": referralSource, // Keeping original template variable name
 	})
 }
 
-// 客服界面
+// Support agent console
 func PageChatMain(c *gin.Context) {
 	c.HTML(http.StatusOK, "chat_main.html", nil)
 }
 
-// 设置界面
+// Settings
 func PageSetting(c *gin.Context) {
 	c.HTML(http.StatusOK, "setting.html", nil)
 }

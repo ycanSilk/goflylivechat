@@ -350,7 +350,7 @@
             visitors:[],
             visitorCount:0,
             visitorCurrentPage:1,
-            visitorPageSize:10,
+            visitorPageSize:20,
             face:[],
             transKefuDialog:false,
             otherKefus:[],
@@ -864,7 +864,7 @@
                 $.ajax({
                     type:"get",
                     url:"/visitors",
-                    data:{page:page},
+                    data:{page:page,pagesize:_this.visitorPageSize},
                     headers:{
                         "token":localStorage.getItem("token")
                     },
