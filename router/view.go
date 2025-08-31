@@ -2,26 +2,56 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"goflylivechat/middleware"
-	"goflylivechat/tmpl"
+	"net/http"
 )
 
 func InitViewRouter(engine *gin.Engine) {
 	//engine.GET("/", tmpl.PageIndex)
+	engine.GET("/login", PageLogin)
+	engine.GET("/pannel", PagePannel)
+	engine.GET("/livechat", PageChat)
+	engine.GET("/main", PageMain)
+	engine.GET("/chat_main", PageChatMain)
+	engine.GET("/setting", PageSetting)
+}
 
-	engine.GET("/login", tmpl.PageLogin)
-	engine.GET("/pannel", tmpl.PagePannel)
-	engine.GET("/chatIndex", tmpl.PageChat)
-	engine.GET("/livechat", tmpl.PageChat)
-	engine.GET("/main", middleware.JwtPageMiddleware, tmpl.PageMain)
-	engine.GET("/chat_main", middleware.JwtPageMiddleware, middleware.DomainLimitMiddleware, tmpl.PageChatMain)
-	engine.GET("/setting", middleware.DomainLimitMiddleware, tmpl.PageSetting)
-	engine.GET("/setting_statistics", tmpl.PageSettingStatis)
-	engine.GET("/setting_welcome", tmpl.PageSettingWelcome)
-	engine.GET("/setting_deploy", tmpl.PageSettingDeploy)
-	engine.GET("/setting_kefu_list", tmpl.PageKefuList)
-	engine.GET("/setting_avator", tmpl.PageAvator)
-	engine.GET("/setting_modifypass", tmpl.PageModifypass)
-	engine.GET("/setting_ipblack", tmpl.PageIpblack)
-	engine.GET("/setting_config", tmpl.PageConfig)
+// 登陆界面
+func PageLogin(c *gin.Context) {
+	c.HTML(http.StatusOK, "login.html", nil)
+}
+
+// 面板界面
+func PagePannel(c *gin.Context) {
+	c.HTML(http.StatusOK, "pannel.html", nil)
+}
+
+// 后台界面
+func PageMain(c *gin.Context) {
+	c.HTML(http.StatusOK, "main.html", nil)
+}
+
+// 咨询界面
+func PageChat(c *gin.Context) {
+	kefuId := c.Query("user_id")
+	refer := c.Query("refer")
+	if refer == "" {
+		refer = c.Request.Referer()
+	}
+	if refer == "" {
+		refer = "​​Direct Link"
+	}
+	c.HTML(http.StatusOK, "chat_page.html", gin.H{
+		"KEFU_ID": kefuId,
+		"Refer":   refer,
+	})
+}
+
+// 客服界面
+func PageChatMain(c *gin.Context) {
+	c.HTML(http.StatusOK, "chat_main.html", nil)
+}
+
+// 设置界面
+func PageSetting(c *gin.Context) {
+	c.HTML(http.StatusOK, "setting.html", nil)
 }
