@@ -56,9 +56,8 @@ func run() {
 	// Gin engine setup
 	engine := gin.Default()
 	engine.LoadHTMLGlob("static/templates/*")
-	engine.Static("/assets", "./static")
 	engine.Static("/static", "./static")
-	engine.Use(tools.Session("gofly"))
+	engine.Use(middleware.SessionHandler())
 	engine.Use(middleware.CrossSite)
 
 	// Middlewares
